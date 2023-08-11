@@ -25,3 +25,5 @@ int main()
     }
     cout<<answer;
 }
+
+//Guyssss please follow avinashraj2026 for more such solutions
