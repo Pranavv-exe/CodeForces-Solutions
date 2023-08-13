@@ -1,74 +1,62 @@
-#include<bits/stdc++.h>
-#include <math.h>
+#include<iostream>
+#include<string>
 using namespace std;
-//Checking if the list is sorted
-bool CheckIfSorted(int a[],int m)
-{
-    int i,c = 0;
-    for(i=0; i<m-1; i++)
+int main (){
+    int n;
+    string output="";
+    cin>>n;
+    for (int i=0;i<n;i++)
     {
-        if(a[i]>a[i+1])
-        {
-            c = 1;
-            break;
+        int n2,num,max_num=0,delta,min_delta=INT_MAX,j2=0,j;
+        bool flag=false;
+        cin>>n2;
+        for ( j=0; j<n2 ;j++){
+            cin>>num;
+            if(flag)
+                continue;
+            if(j==0){
+                max_num=num;
+            }
+            else{
+                if (num>max_num)
+                {
+                    
+                    delta=num-max_num;
+                    max_num=num;
+                    if (delta<min_delta){
+                        min_delta=delta;    
+                    }
+                }
+                else if (num==max_num){
+                    min_delta=1;
+                }
+                else {
+                    flag=true;
+                    min_delta=0;
+                }
+
+                    
+            }
+            
         }
+    if (flag)
+
+         output+= to_string(min_delta);
+
+    else if (min_delta==2){
+        output+= to_string(min_delta);
+
     }
-    if(c==0)
-        return true;
-    else
-        return false;
+    else if (min_delta%2==0){
+        output+=to_string((min_delta/2)+1);
+    }
+    else{
+        output+=to_string((min_delta+1)/2);
+    }
+    if (i!=n-1){
+        output+="\n";
+    }
+    }
+    cout<<output;
+    return(0);
 }
-
-int main()
-{
-    int l = 0;
-    int n,i,j;
-
-    cin >> n;
-    int a = n;
-    int answer[n];
-
-    for(i = 0; i < n; i++)
-    {
-        int m;
-        cin>>m;
-        int arr[m];
-        int minimum;
-        for(j = 0; j<m; j++)
-        {
-            cin>>arr[j];
-        }
-        minimum = abs(arr[0] - arr[1]);
-        if(CheckIfSorted(arr,m))
-        {
-            for(j = 0; j<m-1; j++)
-            {
-                if(abs(arr[j]-arr[j+1])<minimum)
-                    minimum = abs(arr[j] - arr[j+1]);
-            }
-            if(minimum == 0)
-            {
-                answer[l] = 1;
-                l++;
-            }
-            else
-            {
-                answer[l] = ((minimum)/2) + 1;
-                l++;
-            }
-        }
-        else
-        {
-            answer[l] = 0;
-            l++;
-        }
-    }
-
-    for(i=0; i<n; i++)
-    {
-        cout<<answer[i]<<endl;
-    }
-
-}
-
-//Follow avinashraj2026 for more such solutions
